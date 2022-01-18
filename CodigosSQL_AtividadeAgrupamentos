@@ -1,0 +1,10 @@
+Atividades de Agrupamento, Sub consulta e GitHub.
+
+Exercícios de Agrupamento:
+
+1. Agrupe os dependentes por tipo de relação, mostrando somente o atributo
+relação.
+
+SELECT RELACAO FROM DEPENDENTE
+group by RELACAO
+
