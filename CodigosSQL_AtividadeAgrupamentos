@@ -36,7 +36,9 @@ GROUP BY DEPTO
 SELECT depto,AVG(salario),SUM(salario),MAX(salario),MIN(salario),STDDEV(salario) FROM Empregado
 GROUP BY depto
 
+
 Exercícios de Agrupamento com Junção
+
 1. Mostre o nome do empregado e a quantidade de dependentes que cada um possui.
 SELECT nome, COUNT(dependente.nome_dependente)
 FROM empregado
