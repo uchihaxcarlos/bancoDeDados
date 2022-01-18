@@ -4,7 +4,30 @@ Exercícios de Agrupamento:
 
 1. Agrupe os dependentes por tipo de relação, mostrando somente o atributo
 relação.
-
 SELECT RELACAO FROM DEPENDENTE
 group by RELACAO
 
+2. Agrupe os dependentes por sexo mostrando somente o atributo sexo.
+SELECT SEXO FROM DEPENDENTE
+group by SEXO
+
+3. Mostre a quantidade de dependentes por sexo
+SELECT SEXO,COUNT(*)
+FROM DEPENDENTE
+group by SEXO
+
+4. Mostre o valor do maior salário dos empregados
+select avg(salario) as med_salario
+from empregado
+
+5. Mostre o valor do menor salário dos empregados
+SELECT MIN(salario) AS salario
+FROM empregado
+
+6. Mostre a soma total de todos os salários dos empregados
+SELECT SUM(salario) AS salario
+FROM empregado
+
+7. Mostre a soma total dos salários dos empregados por departamento mostrando o código do departamento e os valores para cada um.
+SELECT DEPTO,SUM(SALARIO) FROM EMPREGADO
+GROUP BY DEPTO
