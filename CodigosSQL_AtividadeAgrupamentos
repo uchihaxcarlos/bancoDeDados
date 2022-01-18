@@ -64,3 +64,7 @@ INNER JOIN EMPREGADO_PROJETO ON (EMPREGADO_PROJETO.NUMERO_PROJETO = DEPARTAMENTO
 GROUP BY NUMERO
 
 5. Mostre o nome do departamento e a quantidade de funcionários alocados a cada departamento, somente nos departamento onde a quantidade de funcionários é maior ou igual a 3.
+SELECT DEPARTAMENTO.NOME AS Departamento,COUNT(EMPREGADO.RG) AS Qtd_empregado FROM DEPARTAMENTO
+INNER JOIN EMPREGADO ON (EMPREGADO.RG_SUPERVISOR = DEPARTAMENTO.RG_GERENTE)
+GROUP BY Departamento
+HAVING COUNT(EMPREGADO.RG) >= 3
