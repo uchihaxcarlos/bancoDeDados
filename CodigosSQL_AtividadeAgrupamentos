@@ -31,3 +31,9 @@ FROM empregado
 7. Mostre a soma total dos salários dos empregados por departamento mostrando o código do departamento e os valores para cada um.
 SELECT DEPTO,SUM(SALARIO) FROM EMPREGADO
 GROUP BY DEPTO
+
+8. Mostre a média dos salários, a soma dos salários, o maior salário, o menor salário, e o desvio padrão dos salários.
+SELECT depto,AVG(salario),SUM(salario),MAX(salario),MIN(salario),STDDEV(salario) FROM Empregado
+GROUP BY depto
+
+Exercícios de Agrupamento com Junção
