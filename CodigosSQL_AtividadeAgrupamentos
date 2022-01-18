@@ -47,3 +47,9 @@ ON nome = dependente.nome_dependente
 GROUP BY nome
 
 2. Mostre o nome do empregado a quantidade de projetos em que cada empregado está relacionado.
+SELECT NOME,COUNT(EMPREGADO_PROJETO.NUMERO_PROJETO) FROM EMPREGADO
+INNER JOIN EMPREGADO_PROJETO ON (EMPREGADO_PROJETO.RG_EMPREGADO = EMPREGADO.RG)
+GROUP BY NOME,RG_EMPREGADO
+
+3. Para cada empregado, mostre seu nome e a soma total da quantidade de horas alocadas a projetos na qual é participante. o Resultado deve ser apresentado em ordem decrescente.
+
