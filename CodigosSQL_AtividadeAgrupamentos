@@ -64,7 +64,13 @@ INNER JOIN EMPREGADO_PROJETO ON (EMPREGADO_PROJETO.NUMERO_PROJETO = DEPARTAMENTO
 GROUP BY NUMERO
 
 5. Mostre o nome do departamento e a quantidade de funcionários alocados a cada departamento, somente nos departamento onde a quantidade de funcionários é maior ou igual a 3.
-SELECT DEPARTAMENTO.NOME AS Departamento,COUNT(EMPREGADO.RG) AS Qtd_empregado FROM DEPARTAMENTO
+SELECT DEPARTAMENTO.NOME AS Departamento,COUNT(EMPREGADO.RG) AS Qtd_empregados FROM DEPARTAMENTO
 INNER JOIN EMPREGADO ON (EMPREGADO.RG_SUPERVISOR = DEPARTAMENTO.RG_GERENTE)
 GROUP BY Departamento
 HAVING COUNT(EMPREGADO.RG) >= 3
+
+6. Mostre o nome do departamento e a soma total dos salários dos empregados por departamento, somente para departamentos onde a soma é maior que 6000.
+SELECT DEPARTAMENTO.NOME AS Departamento,SUM(EMPREGADO.SALARIO) AS SomaSalario FROM DEPARTAMENTO
+INNER JOIN EMPREGADO ON (EMPREGADO.RG_SUPERVISOR = DEPARTAMENTO.RG_GERENTE)
+GROUP BY Departamento
+HAVING SUM(EMPREGADO.SALARIO) > 6000
