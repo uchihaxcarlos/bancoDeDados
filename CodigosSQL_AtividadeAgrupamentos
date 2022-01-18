@@ -52,4 +52,15 @@ INNER JOIN EMPREGADO_PROJETO ON (EMPREGADO_PROJETO.RG_EMPREGADO = EMPREGADO.RG)
 GROUP BY NOME,RG_EMPREGADO
 
 3. Para cada empregado, mostre seu nome e a soma total da quantidade de horas alocadas a projetos na qual é participante. o Resultado deve ser apresentado em ordem decrescente.
+SELECT NOME,SUM(EMPREGADO_PROJETO.HORAS) AS DURACAO FROM EMPREGADO
+INNER JOIN EMPREGADO_PROJETO ON (EMPREGADO_PROJETO.RG_EMPREGADO = EMPREGADO.RG)
+GROUP BY NOME,RG_EMPREGADO
+ORDER BY DURACAO DESC
 
+4. Mostre o número do departamento e a quantidade de empregados alocados a cada departamento (considere somente departamentos que possuem empregados alocados).
+SELECT NUMERO AS NUMERO_PROJETO , COUNT(EMPREGADO_PROJETO.RG_EMPREGADO) AS QT_PROJETOS FROM DEPARTAMENTO
+INNER JOIN DEPARTAMENTO_PROJETO ON (DEPARTAMENTO_PROJETO.NUMERO_DEPTO = DEPARTAMENTO.NUMERO)
+INNER JOIN EMPREGADO_PROJETO ON (EMPREGADO_PROJETO.NUMERO_PROJETO = DEPARTAMENTO_PROJETO.NUMERO_PROJETO)
+GROUP BY NUMERO
+
+5. Mostre o nome do departamento e a quantidade de funcionários alocados a cada departamento, somente nos departamento onde a quantidade de funcionários é maior ou igual a 3.
