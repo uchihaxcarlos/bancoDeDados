@@ -74,3 +74,64 @@ SELECT DEPARTAMENTO.NOME AS Departamento,SUM(EMPREGADO.SALARIO) AS SomaSalario F
 INNER JOIN EMPREGADO ON (EMPREGADO.RG_SUPERVISOR = DEPARTAMENTO.RG_GERENTE)
 GROUP BY Departamento
 HAVING SUM(EMPREGADO.SALARIO) > 6000
+
+Exercícios de Subconsulta:
+
+1 - Mostre o nome do empregado,rg, cpf e nome do departamento, para todos os empregados que são gerentes de algum departamento cujo salário é maior que a média
+dos salários dos empregados. (obs: renomear adequadamente os atributos nome conforme necessidade)
+
+SELECT empregado.nome, empregado.rg, empregado.cpf, departamento.nome, empregado.salario
+FROM empregado AS empregado
+JOIN departamento AS departamento
+ON empregado.rg = departamento.rg_gerente
+WHERE salario > (SELECT AVG(salario) FROM empregado);
+
+2. Mostre o nome do empregado,rg, cpf, salario, nome do departamento, e a média de salário entre todos os empregados, de modo que apareçam no
+resultado somente os empregados que são gerentes de algum departamento e cujo salário é maior que a média dos salários dos empregados.
+(obs: renomear adequadamente os atributos nome conforme necessidade)
+
+SELECT empregado.nome, empregado.rg, empregado.cpf, departamento.nome, empregado.salario, departamento.numero,
+(SELECT AVG(salario) FROM empregado)
+FROM empregado AS empregado
+JOIN departamento AS departamento
+ON empregado.rg = departamento.rg_gerente
+WHERE salario > (SELECT AVG(salario) FROM empregado);
+
+3. Utilizando-se de subconsultas, mostre os nomes e rg de todos os empregados que não possuem
+registros na tabela historico_salario.
+
+SELECT empregado.nome, empregado.rg FROM empregado
+WHERE empregado.rg NOT IN (SELECT rg FROM historico_salario);
+
+4. Mostre todos os atributos relativos aos empregados, retornando apenas os registros cujos salários são menores que o valor médio dos salários
+presentes na tabela histórico_salario.
+
+SELECT empregado.* FROM empregado 
+WHERE salario < (SELECT AVG(salario) FROM historico_salario)
+
+5. Mostre todos os atributos relativos aos empregados, retornando apenas os registros cujos salários que estão entre: o valor do menor salário + 1000
+e a média dos salários + 1000.
+
+SELECT empregado.* FROM empregado 
+WHERE salario BETWEEN (SELECT MIN(salario) + 1000 FROM empregado) 
+AND (SELECT AVG(salario)+ 1000 FROM empregado)
+
+6. Mostre todos os atributos relativos aos empregados, retornando apenas os registros cujos salários que estão entre a média - desvio (média - desvio padrão)
+e a média mais desvio (média + desvio padrão).
+
+SELECT empregado.* FROM empregado 
+WHERE salario BETWEEN (SELECT AVG(salario) - stddev(salario) FROM empregado) 
+AND (SELECT AVG(salario) + stddev(salario) FROM empregado)
+
+7. Utilizando-se de subconsulta mostre o nome do empregado e o número de projetos que ele participa,
+somente para os empregados que são gerentes de departamento.
+
+SELECT empregado.nome, COUNT(empregado.depto) AS qtd_projetos_trabalha,
+projeto.nome
+FROM empregado_projeto INNER
+JOIN projeto 
+ON (projeto.numero = empregado_projeto.numero_projeto)
+JOIN empregado
+ON (empregado.rg=empregado_projeto.rg_empregado)
+GROUP BY empregado.nome ,projeto.nome
+ORDER BY empregado.nome ASC
